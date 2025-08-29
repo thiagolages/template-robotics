@@ -10,15 +10,16 @@ services:
       context: .
       dockerfile: docker/Dockerfile
       args:
+        USERNAME: ${USER}
         COPPELIA_VERSION: "4_10_0"
         COPPELIA_REVISION: "rev0"
         COPPELIA_OS: "Ubuntu22_04"
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw   # GUI sharing
-      - ./src:/home/thiago/workspace/src
-      - ./data:/home/thiago/workspace/data
-      - ./scripts:/home/thiago/workspace/scripts
-    command: /home/thiago/workspace/scripts/command.sh
+      - ./src:/home/${USER}/workspace/src
+      - ./data:/home/${USER}/workspace/data
+      - ./scripts:/home/${USER}/workspace/scripts
+    command: /home/${USER}/workspace/scripts/command.sh
     environment:
       DISPLAY:
       QT_X11_NO_MITSHM: 1
